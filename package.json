@@ -1,0 +1,22 @@
+{
+  "name": "svn-resolver",
+  "version": "0.1.0",
+  "description": "SVN resolver for Bower, allowing credentials to be stored in .bowerrc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bower-resolver"
+  ],
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/Polarisation/svn-resolver.git"
+  },
+  "author": { "name" : "Justin Emery" },
+  "license": "MIT",
+  "dependencies": {
+    "node.svn": "^0.1.8",
+    "tmp": "0.0.28"
+  }
+}
