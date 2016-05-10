@@ -1,6 +1,6 @@
 {
   "name": "svn-resolver",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SVN resolver for Bower, allowing credentials to be stored in .bowerrc",
   "main": "index.js",
   "scripts": {

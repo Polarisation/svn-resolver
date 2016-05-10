@@ -26,10 +26,12 @@ module.exports = function resolver (bower) {
 			var tempDir = tmp.dirSync();
 
 			var svnConfig = { cwd: tempDir.name };
-			if(bower.config.svnResolver.password !== undefined)
-				svnConfig["username"] = bower.config.svnResolver.username;
-			if(bower.config.svnResolver.password !== undefined)
-				svnConfig["password"] = bower.config.svnResolver.password;
+			if(bower.config.svnResolver !== undefined) {
+				if(bower.config.svnResolver.password !== undefined)
+					svnConfig["username"] = bower.config.svnResolver.username;
+				if(bower.config.svnResolver && bower.config.svnResolver.password !== undefined)
+					svnConfig["password"] = bower.config.svnResolver.password;
+			}
 
 			var svn = new SVN(svnConfig);
 
