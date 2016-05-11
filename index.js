@@ -4,7 +4,7 @@ var SVN = require('node.svn');
 module.exports = function resolver (bower) {
 	return {
 		match: function (source) {
-			return source.indexOf('svn+https://') === 0
+			return source.indexOf('svn+https://') === 0;
 		},
 
 		// no normalisation required
@@ -12,15 +12,33 @@ module.exports = function resolver (bower) {
 			return source;
 		},
 
+		// returns a release corresponding to the last changed revision of the trunk
+		// e.g. if the last change was revision 12345, this is translated to the semantic version 12345.0.0
+		// this allows `bower update` to install the newest version from trunk
 		releases: function (source) {
-			return [];
+			var svnRemoteUrl = source.replace("svn+", "");
+			var tempDir = tmp.dirSync();
+			var svn = new SVN({ cwd: tempDir.name });
+			return new Promise(function(resolve, reject) {
+				svn.info(svnRemoteUrl, function(err, svnInfo) {
+					if(err)
+						reject("Error during SVN info: "+err);
+					else {
+						var semVar = svnInfo.lastchangedrev+".0.0";
+						resolve([ { target: semVar, version: semVar } ]);
+					}
+				});
+			});
 		},
 
 		fetch: function (endpoint, cached) {
 			var svnRemoteUrl = endpoint.source.replace("svn+", "");
 			if(endpoint.target === "trunk")
 				svnRemoteUrl += "/trunk";
-			else if(endpoint.target !== undefined)
+			else if(endpoint.target.match(/([1-9][0-9]*)\.0\.0/)) {
+				var svnRevision = endpoint.target.replace(".0.0", "");
+				svnRemoteUrl += "/trunk@"+svnRevision;
+			} else if(endpoint.target !== undefined)
 				svnRemoteUrl += "/tags/"+endpoint.target;
 
 			var tempDir = tmp.dirSync();

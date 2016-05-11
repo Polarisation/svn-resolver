@@ -1,7 +1,7 @@
 {
   "name": "svn-resolver",
-  "version": "0.1.1",
-  "description": "SVN resolver for Bower, allowing credentials to be stored in .bowerrc",
+  "version": "0.2.0",
+  "description": "SVN pluggable resolver for Bower, overriding and enhancing the default functionality",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
