@@ -18,7 +18,16 @@ module.exports = function resolver (bower) {
 		releases: function (source) {
 			var svnRemoteUrl = source.replace("svn+", "");
 			var tempDir = tmp.dirSync();
-			var svn = new SVN({ cwd: tempDir.name });
+
+			var svnConfig = { cwd: tempDir.name };
+			if(bower.config.svnResolver !== undefined) {
+				if(bower.config.svnResolver.password !== undefined)
+					svnConfig["username"] = bower.config.svnResolver.username;
+				if(bower.config.svnResolver && bower.config.svnResolver.password !== undefined)
+					svnConfig["password"] = bower.config.svnResolver.password;
+			}
+
+			var svn = new SVN(svnConfig);
 			return new Promise(function(resolve, reject) {
 				svn.info(svnRemoteUrl, function(err, svnInfo) {
 					if(err)
