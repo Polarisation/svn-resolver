@@ -1,5 +1,6 @@
 var tmp = require('tmp');
 var SVN = require('node.svn');
+var run = require('gulp-run');
 
 module.exports = function resolver (bower) {
 	return {
@@ -66,10 +67,15 @@ module.exports = function resolver (bower) {
 				svn.co(svnRemoteUrl, function (err, info) {
 					if(err)
 						reject("Error during SVN checkout: "+err);
-					else resolve({
+					else {
+						// ensure the folder is accessible
+						run('chmod -R ugo+X '+tempDir.name).exec();
+
+						resolve({
 							tempPath: tempDir.name,
 							removeIgnores: true
 						});
+					}
 				});
 			});
 		}
