@@ -45,9 +45,14 @@ module.exports = function resolver (bower) {
 			var svnRemoteUrl = endpoint.source.replace("svn+", "");
 			if(endpoint.target === "trunk")
 				svnRemoteUrl += "/trunk";
+			else if(endpoint.target === "-no-trunk")
+				svnRemoteUrl += ""; // don't append trunk directory
 			else if(endpoint.target.match(/^([1-9][0-9]*)\.0\.0$/)) {
 				var svnRevision = endpoint.target.replace(".0.0", "");
 				svnRemoteUrl += "/trunk@"+svnRevision;
+			} else if(endpoint.target.match(/^r([1-9][0-9]*)-no-trunk$/)) {
+				var svnRevision = endpoint.target.replace("-no-trunk","").replace("r","");
+				svnRemoteUrl += "/@"+svnRevision;
 			} else if(endpoint.target.match(/^r([1-9][0-9]*)$/)) {
 				var svnRevision = endpoint.target.replace("r","");
 				svnRemoteUrl += "/trunk@"+svnRevision;

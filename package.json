@@ -1,6 +1,6 @@
 {
   "name": "svn-resolver",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "SVN pluggable resolver for Bower, overriding and enhancing the default functionality",
   "main": "index.js",
   "scripts": {
