@@ -41,4 +41,4 @@ Versions are mapped as follows:
  - `#` for the latest revision from trunk (`bower update` works)
  - `#trunk` for the trunk, but `bower update` will not pull down new revisions. This probably has little use but is provided to match the default Bower behaviour.
  - `#[tag]` for `tags/[tag]` (`bower update` will not work but since tags should not change, this should not be an issue)
- - `#[revision].0.0` will use trunk at the specified `[revision]`. `.0.0` must be appended to match the semantic versioning expected by Bower. 
+ - `#[revision].0.0` or `#r[revision]` will use trunk at the specified `[revision]`.
