@@ -5,7 +5,8 @@ var run = require('gulp-run');
 module.exports = function resolver (bower) {
 	return {
 		match: function (source) {
-			return source.indexOf('svn+https://') === 0;
+			return source.indexOf('svn+https://') === 0 
+				|| source.indexOf('svn+http://') === 0;
 		},
 
 		// no normalisation required
