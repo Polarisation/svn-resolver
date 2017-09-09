@@ -5,7 +5,8 @@ var run = require('gulp-run');
 module.exports = function resolver (bower) {
 	return {
 		match: function (source) {
-			return source.indexOf('svn+https://') === 0;
+			return source.indexOf('svn+https://') === 0 
+				|| source.indexOf('svn+http://') === 0;
 		},
 
 		// no normalisation required
@@ -76,9 +77,11 @@ module.exports = function resolver (bower) {
 					if(err)
 						reject("Error during SVN checkout: "+err);
 					else {
-						// ensure the folder is accessible
-						run('chmod -R ugo+X '+tempDir.name).exec();
-
+						
+						if ('win32' !== process.platform) {
+							run('chmod -R +X '+ tempDir.name).exec();
+						}
+						
 						resolve({
 							tempPath: tempDir.name,
 							removeIgnores: true
