@@ -1,4 +1,6 @@
 # svn-resolver
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Polarisation/svn-resolver.svg)](https://greenkeeper.io/)
 SVN [pluggable resolver](http://bower.io/docs/pluggable-resolvers/) for Bower. Bower has some support for SVN, but this resolver overrides the default to provide enhanced functionality to better support typical SVN workflows. So far it allows storage of credentials in `.bowerrc`, provides the capability to update from trunk, and allows SVN targets which do not use the typically trunk/tags structure.
 
 [![NPM](https://nodei.co/npm/svn-resolver.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/svn-resolver/)
